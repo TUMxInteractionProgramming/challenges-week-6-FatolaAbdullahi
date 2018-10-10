@@ -1,6 +1,22 @@
 /* start the external action and say hello */
 console.log("App is alive");
 
+// initializing the app
+$(document).ready(function() {
+        listChannels(compareNew);
+        loadEmojis();
+        console.log("App is initialized");
+
+    // interval triggers at every 10 seconds
+    function updateMessages(){
+        alert ('Updating Message elements...');
+        console.log('Updating Message elements...');
+        Message();
+    }
+    var currentTime = setTimeout(updateMessages, 10000);
+    return currentTime
+});
+
 /** #10 global #array of channels #arr*/
 var channels = [
     yummy,
@@ -27,7 +43,7 @@ var currentLocation = {
  * Switch channels name in the right app bar
  * @param channelObject
  */
-function switchChannel(channelObject) {
+function switchChannel(channelObject, channelElement) {
     // Log the channel switch
     console.log("Tuning in to channel", channelObject);
 
@@ -36,7 +52,6 @@ function switchChannel(channelObject) {
 
     // Write the new channel to the right app bar using object property
     document.getElementById('channel-name').innerHTML = channelObject.name;
-
     // change the channel location using object property
     document.getElementById('channel-location').innerHTML = 'by <a href="https://w3w.co/'
         + channelObject.createdBy
@@ -48,14 +63,22 @@ function switchChannel(channelObject) {
     $('#channel-star i').removeClass('fas far');
     $('#channel-star i').addClass(channelObject.starred ? 'fas' : 'far');
 
-
     /* highlight the selected #channel.
        This is inefficient (jQuery has to search all channel list items), but we'll change it later on */
-    $('#channels li').removeClass('selected');
-    $('#channels li:contains(' + channelObject.name + ')').addClass('selected');
-
-    /* store selected channel in global variable */
+    $('li').removeClass('selected');
+    channelElement = $('li:contains(' + channelObject.name + ')').addClass('selected');
+   
+   
+       /* store selected channel in global variable */
     currentChannel = channelObject;
+
+    $.each(currentChannel, function(index, value){
+        $("div.message").find("em").Math.round((expiresIn * 10) / 10);
+        console.log('time left');
+    });
+    
+    
+    showMessages();
 }
 
 /* liking a channel on #click */
@@ -126,6 +149,11 @@ function Message(text) {
     this.text = text;
     // own message
     this.own = true;
+    update() = update;
+    if (update < 5.0) {
+        return $(update).css('color', 'red');
+        console.log('running');
+    } 
 }
 
 function sendMessage() {
@@ -168,6 +196,9 @@ function createMessageElement(messageObject) {
     // Calculating the expiresIn-time from the expiresOn-property
     var expiresIn = Math.round((messageObject.expiresOn - Date.now()) / 1000 / 60);
 
+    // reworking to create 'div' as jquery object
+    $("<div/>").appendTo(messageObject);
+
     // Creating a message-element
     return '<div class="message'+
         //this dynamically adds #own to the #message, based on the
@@ -181,6 +212,25 @@ function createMessageElement(messageObject) {
         '<p>' + messageObject.text + '</p>' +
         '<button class="accent">+5 min.</button>' +
         '</div>';
+
+        // en event listener on each 5min button
+        $(".accent").click(function(){
+            clearTimeout(currentTime);
+            setTimeout(updateMessages, 300000);
+            update();
+        });
+}
+
+// showing messages belonging to channels
+function showMessages() {
+    $.each(channels, function () {
+        $.each(this, function(index, value){
+            return (value == messages);
+            $('#messages').append(value);
+            console.log('see messages');
+        });
+        
+    });
 }
 
 /* #10 Three #compare functions to #sort channels */
@@ -216,14 +266,18 @@ function compareFavorites(channelA, channelB) {
 
 function listChannels(criterion) {
     // #10 #sorting: #sort channels#array by the criterion #parameter
-    channels.sort(criterion);
+    currentChannel = channels.sort(criterion);
+    
 
+    // highlighting currently selected channels
+    
     // #10 #sorting #duplicate: empty list
     $('#channels ul').empty();
 
     /* #10 append channels from #array with a #for loop */
     for (i = 0; i < channels.length; i++) {
         $('#channels ul').append(createChannelElement(channels[i]));
+        
     };
 }
 
@@ -308,8 +362,19 @@ function createChannelElement(channelObject) {
      </li>
      */
 
-    // create a channel
-    var channel = $('<li>').text(channelObject.name);
+    
+     // create a channel
+     var channel = $('<li>').text(channelObject.name);
+     channelElement = channel;
+// #### Adding click event listener to <li> 
+$("li").click(function() {
+    $(this).show();
+    switchChannel(channelObject, channelElement);
+    $(this).hide(channelElement);
+    $(this).hide(channelObject);
+    console.log('success');
+});  
+
 
     // create and append channel meta
     var meta = $('<span>').addClass('channel-meta').appendTo(channel);

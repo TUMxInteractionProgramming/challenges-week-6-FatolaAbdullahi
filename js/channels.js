@@ -16,7 +16,7 @@ var sevencontinents = {
     starred: true,
     expiresIn: 60,
     messageCount: 5,
-    messages : []           // #10 #message s property in #chl object
+    messages : []           // #10 #messsage s property in #chl object
 
 };
 

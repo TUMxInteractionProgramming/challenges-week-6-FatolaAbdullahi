@@ -180,6 +180,7 @@ li i.fas, li i.far {
 
 li.selected {
     color: #3F51B5;
+    
     border-left: 4px solid #3F51B5;
 }
 
