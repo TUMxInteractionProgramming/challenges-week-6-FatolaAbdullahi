@@ -18,7 +18,7 @@ var yummy = {
     starred: false,
     expiresIn: 100,
     messageCount: 999,
-    messages : ["mememmem"]           // #10 #message s property in #chl object
+    messages : []           // #10 #message s property in #chl object
 };
 
 

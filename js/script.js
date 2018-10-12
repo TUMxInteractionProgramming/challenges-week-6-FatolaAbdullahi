@@ -7,7 +7,7 @@ $(document).ready(function() {
         loadEmojis();
         console.log("App is initialized");
 
-    // interval triggers at every 10 seconds
+    // interval trigers at every 10 seconds
     function updateMessages(){
         console.log('Updating Message elements...', Message(this.update));
         alert('Updating Message elements...', Message(this.update));
@@ -17,7 +17,7 @@ $(document).ready(function() {
     return currentTime;
 });
 
-/** #10 global #array of channels #arr*/
+/** #10 global #array of chanels #arr*/
 var channels = [
     yummy,
     sevencontinents,
