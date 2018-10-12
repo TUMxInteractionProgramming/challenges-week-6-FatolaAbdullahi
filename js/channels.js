@@ -1,13 +1,4 @@
 
-var yummy = {
-    name: "#Yummy",
-    createdOn: new Date(2016, 03, 01), /* month 0 is jan. */
-    createdBy: "minus.plus.yummy",
-    starred: false,
-    expiresIn: 100,
-    messageCount: 999,
-    messages : []           // #10 #message s property in #chl object
-};
 
 var sevencontinents = {
     name: "#SevenContinents",
@@ -19,6 +10,17 @@ var sevencontinents = {
     messages : []           // #10 #messsage s property in #chl object
 
 };
+
+var yummy = {
+    name: "#Yummy",
+    createdOn: new Date(2016, 03, 01), /* month 0 is jan. */
+    createdBy: "minus.plus.yummy",
+    starred: false,
+    expiresIn: 100,
+    messageCount: 999,
+    messages : ["mememmem"]           // #10 #message s property in #chl object
+};
+
 
 var killerapp = {
     name: "#KillerApp",
