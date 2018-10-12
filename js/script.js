@@ -268,8 +268,12 @@ function compareFavorites(channelA, channelB) {
 
 function listChannels(criterion) {
     // #10 #sorting: #sort channels#array by the criterion #parameter
-    channels.sort(criterion);
-    
+    $.each (channels.sort(criterion), function(index, value){
+        return value;
+        if (value == currentChannel) {
+            return  $(channelElement).addClass('selected'); 
+        }
+    });
     // #10 #sorting #duplicate: empty list
     $('#channels ul').empty();
     
